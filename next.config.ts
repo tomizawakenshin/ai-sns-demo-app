@@ -1,15 +1,27 @@
-import type { NextConfig } from "next";
+// ファイルパス: next.config.ts
+
+import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  // 既存の images.domains 設定
   images: {
     domains: [
-      // ここに許可したい外部ホスト名を列挙します
       'via.placeholder.com',
-      // もし他にimagesドメインを使うなら、
+      // 必要に応じて他のホストを追加できます
       // 'example.com',
       // 'another-domain.net',
     ],
+  },
+
+  // ルート (/) にアクセスがあったら /signin にリダイレクトする
+  async redirects() {
+    return [
+      {
+        source: '/',           // ルートにアクセスしたとき
+        destination: '/signin',// /signin に転送する
+        permanent: false,      // 一時リダイレクト (ブラウザキャッシュに残さない)
+      },
+    ];
   },
 };
 
